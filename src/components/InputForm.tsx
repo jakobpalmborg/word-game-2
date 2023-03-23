@@ -4,7 +4,7 @@ import InputField from './InputField';
 export default function InputForm() {
   let numberOfFields: number[] = [0, 1, 2, 3, 4];
 
-  const [letter, setLetter] = useState('');
+  // const [letter, setLetter] = useState('');
   const [formData, setFormData] = useState({
     letter0: '',
     letter1: '',
@@ -13,13 +13,13 @@ export default function InputForm() {
     letter4: '',
   });
 
-  function handleChange(event: { target: { value: any } }) {
+  function handleChange(event) {
     const { name, value } = event.target;
 
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
-        [event.target.name]: event.target.value,
+        [name]: value,
       };
     });
     // setLetter(event.target.value);

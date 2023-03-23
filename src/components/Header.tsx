@@ -3,7 +3,7 @@ import React from 'react';
 export default function Header() {
   return (
     <>
-      <header className="bg-stone-800 h-32">
+      <header className="bg-stone-800 h-32 mb-1">
         <h2 className="p-4 text-stone-50 text-2xl">
           <a href="#">Word Game</a>
         </h2>

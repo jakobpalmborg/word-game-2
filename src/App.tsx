@@ -8,10 +8,7 @@ function App() {
     <>
       <Header />
       <InputForm />
-      <InputForm />
-      <InputForm />
-      <InputForm />
-      <InputForm />
+
       <Footer />
     </>
   );

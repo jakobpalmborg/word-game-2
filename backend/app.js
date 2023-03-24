@@ -1,6 +1,10 @@
 import express from 'express';
+// import { engine } from 'express-handlebars';
 
 const app = express();
+// app.engine('handlebars', engine());
+// app.set('views', './templates');
+// app.set('partials', '/templates/partials');
 
 // app.get('/', (req, res) => {
 //   res.send('index');

@@ -4,7 +4,7 @@ import { engine } from 'express-handlebars';
 const app = express();
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
-app.set('views', './backend/templates/');
+app.set('views', './src/templates/');
 app.set('partials', '/templates/partials');
 
 // app.get('/', (req, res) => {

@@ -25,7 +25,7 @@ export default function InputForm({ onSubmit }) {
   }
 
   return (
-    <div className="flex my-1  justify-center ml-11">
+    <div className="flex my-2 justify-center ml-11">
       <form
         onSubmit={(event) => onSubmit(event, formData)}
         className="flex gap-1"

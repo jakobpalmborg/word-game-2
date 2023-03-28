@@ -29,7 +29,7 @@ app.use(express.static('../frontend/dist'));
 app.use(express.static('./public'));
 
 
-// /start
+// /startff
 //    get()
 
 // /feedback

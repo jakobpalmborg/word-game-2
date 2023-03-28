@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "node ./dist/index.js",
-    "back-dev": "concurrently \"npm run node-watch\" \"npm run ts-watch\" \"npm run tw-watch\" ",
+    "back-dev": "concurrently \"npm run ts-watch\" \"npm run tw-watch\" \"npm run node-watch\" ",
     "node-watch": "nodemon dist/index.js",
-    "ts-watch": "tsc -w",
+    "ts-watch": "npx tsc -w",
     "tw-watch": "npx tailwindcss -i ./src/css/input.css -o ./public/output.css --watch",
     "build-ts": "npx tsc",
     "build-tw": "npx tailwindcss -i ./src/css/input.css -o ./public/output.css",

@@ -2,7 +2,7 @@ export default function feedback(correct: string, guess: string) {
     let correctArray = correct.toUpperCase().split("");
     let guessArray = guess.toUpperCase().split("");
   
-    let result;
+    let result = "";
   
     let resultObjects = guessArray.map((letter, index) => {
       if (letter === correctArray[index]) {

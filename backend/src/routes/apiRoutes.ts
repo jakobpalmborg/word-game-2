@@ -3,21 +3,14 @@ import feedback from '../controllers/feedback.js'
 
 const router = Router();
 
-
-
+ // /feedback
 router.get('/feedback', async (req, res) => {
-
-
     res.json(await feedback('cykla', 'hallå'))
 })
-
-
-  // /start
-  //    get()
+ 
+// /highscore
+ //     post
   
-  // /feedback
   
-  // /highscore
-
 
 export default router;

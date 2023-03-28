@@ -1,7 +1,5 @@
 export default function getRandomWord(list: string[], length: number, noDuplicates: boolean = false) {
 
-    
-
     let randomWord: string = "";
     let newList1: string[]  = [];
     let newList2: string[] = [];

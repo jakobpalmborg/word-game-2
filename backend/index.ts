@@ -5,7 +5,9 @@ const app = express();
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './src/templates/');
-app.set('partials', '/templates/partials');
+app.set('partials', './templates/partials');
+
+const port = 5080;
 
 // app.get('/', (req, res) => {
 //   res.send('index page');
@@ -24,13 +26,16 @@ app.get('/highscore', (req, res) => {
 // });
 
 app.use(express.static('../frontend/dist'));
-app.use(express.static('./dist'));
+app.use(express.static('./public'));
 
-// /game
-// /word
 
-// app.get('game')
+// /start
+//    get()
 
-// post highscore
+// /feedback
 
-app.listen(5080);
+// /highscore
+
+app.listen(port, () => {
+  console.log(`now listening on port ${port}`);
+});

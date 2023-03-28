@@ -1,5 +1,5 @@
 import { describe, it } from '@jest/globals';
-import getRandomWord from './getRandomWord';
+import getRandomWord from './getRandomWord.js';
 
 describe('getRandomWord()', () => {
     // this test if the return is one of the strings from the input array

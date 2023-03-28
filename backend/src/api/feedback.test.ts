@@ -1,5 +1,5 @@
 import { describe, it } from '@jest/globals';
-import feedback from './feedback';
+import feedback from './feedback.js';
 
 describe('feedback()', () => {
 

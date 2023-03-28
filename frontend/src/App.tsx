@@ -1,8 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import InputForm from './components/InputForm';
 
 function App() {
+  useEffect(() => {
+    async function getFeedback() {
+      const res = await fetch('./api/feedback');
+      const payload = await res.json();
+      console.log(payload);
+    }
+    getFeedback();
+  }, []);
+
   const [guessListLetters, setGuessListLetters] = useState([
     // this format comes back from API
     // { letter: 'H', result: 'incorrect' },

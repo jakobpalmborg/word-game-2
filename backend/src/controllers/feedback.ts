@@ -1,4 +1,5 @@
 export default function feedback(correct: string, guess: string) {
+  
     let correctArray = correct.toUpperCase().split("");
     let guessArray = guess.toUpperCase().split("");
   

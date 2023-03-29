@@ -5,7 +5,9 @@ const router = Router();
 
  // /feedback
 router.get('/feedback', async (req, res) => {
-    res.json(await feedback('cykla', 'hallå'))
+    
+    res.json(await feedback('cykla', req.query.guess))
+   
 })
  
 // /highscore

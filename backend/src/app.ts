@@ -4,6 +4,7 @@ import pageRoutes from './routes/pageRoutes.js';
 import apiRoutes from './routes/apiRoutes.js';
 
 const app = express();
+app.use(express.json());
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './src/templates/');

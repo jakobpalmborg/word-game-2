@@ -9,15 +9,6 @@ export default function HighscoreForm() {
     noDuplicate: false,
   });
 
-  //Started writing on this useEffect for posting highscore to DB
-  // useEffect(() => {
-  //   async function postHighscore() {
-  //     const res = await fetch(`./api/highscore`);
-  //     const payload = await res.json();
-  //   }
-  //   postHighscore();
-  // }, []);
-
   function handleChange(event) {
     setHighscoreFormData((prevData) => ({
       ...prevData,
@@ -27,6 +18,11 @@ export default function HighscoreForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    fetch('./api/highscore', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(highscoreFormData),
+    });
   }
 
   return (

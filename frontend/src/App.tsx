@@ -39,7 +39,7 @@ function App() {
             className={
               item.result === 'correct'
                 ? 'bg-green-700'
-                : item.result === 'incorrect'
+                : item.result === 'missplaced'
                 ? 'bg-yellow-500'
                 : 'bg-gray-400'
             }

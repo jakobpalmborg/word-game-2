@@ -1,11 +1,29 @@
 import mongoose from 'mongoose';
 
-const Highscore = mongoose.model('Highscore', {
+interface IHighscore {
+  name: String;
+  time: Number;
+  guesses: Number;
+  wordLength: Number;
+  noDuplicate: Boolean;
+}
+
+const highscoreSchema = new mongoose.Schema<IHighscore>({
   name: String,
   time: Number,
   guesses: Number,
   wordLength: Number,
   noDuplicate: Boolean,
 });
+
+const Highscore = mongoose.model<IHighscore>('Highscore', highscoreSchema);
+
+// const Highscore: = mongoose.model('Highscore', {
+//   name: String,
+//   time: Number,
+//   guesses: Number,
+//   wordLength: Number,
+//   noDuplicate: Boolean,
+// });
 
 export { Highscore };

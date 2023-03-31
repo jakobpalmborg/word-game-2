@@ -1,5 +1,9 @@
 import { Router } from 'express';
 import feedback from '../controllers/feedback.js';
+import mongoose from 'mongoose';
+import { Highscore } from '../models.js';
+
+mongoose.connect(process.env.MONGODB_URL);
 
 const router = Router();
 
@@ -9,8 +13,11 @@ router.get('/feedback', async (req, res) => {
 });
 
 //  post (name, time, guesses, wordLength, duplicate)
-router.post('/highscore', (req, res) => {
-  console.log(req.body);
+router.post('/highscore', async (req, res) => {
+  const highscore = new Highscore(req.body);
+  await highscore.save();
+
+  res.status(201).json({ data: req.body });
 });
 
 // /start (choose a new word to play with)

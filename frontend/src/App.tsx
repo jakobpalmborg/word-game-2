@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import InputForm from './components/InputForm';
+import HighscoreForm from './components/HighscoreForm';
 
 function App() {
   const [guess, setGuess] = useState('');
@@ -55,6 +56,7 @@ function App() {
       </ul>
 
       <InputForm onSubmit={handleSubmit} />
+      <HighscoreForm />
     </>
   );
 }

@@ -8,21 +8,25 @@ mongoose.connect(process.env.MONGODB_URL);
 const router = Router();
 
 // /feedback
-router.get('/feedback', async (req, res) => {
+router.get('/api/feedback', async (req, res) => {
   res.json(await feedback('fiska', req.query.guess));
 });
 
-// highscore
-router.get('/highscore', async (req, res) => {
-  const highscores = await Highscore.find();
+// Highscore GET (name, time, guesses, wordLength, duplicate)
+async function getHighscore() {
+  let response = await Highscore.find();
+  console.log(response);
+  let data = JSON.parse(JSON.stringify(response));
+  return data;
+}
 
-  res.status(200).json({
-    data: highscores,
-  });
+router.get('/highscore', async (req, res) => {
+  const highscores = await getHighscore();
+  res.render('highscore', { highscores });
 });
 
-//  post (name, time, guesses, wordLength, duplicate)
-router.post('/highscore', async (req, res) => {
+//  Highscore POST
+router.post('/api/highscore', async (req, res) => {
   const highscore = new Highscore(req.body);
   await highscore.save();
 

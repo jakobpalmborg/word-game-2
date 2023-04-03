@@ -12,6 +12,8 @@ function App() {
     noDuplicate: false,
   });
 
+  console.log(startFormData.numberOfLetters);
+
   const [gameStarted, setGameStarted] = useState(false);
 
   function handleChange(event) {
@@ -46,6 +48,7 @@ function App() {
     );
   }
 
+  // for styling the guesses depending on number of letters
   let width: string =
     startFormData.numberOfLetters === 3
       ? 'w-52'

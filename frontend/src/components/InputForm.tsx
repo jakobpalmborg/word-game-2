@@ -26,7 +26,7 @@ export default function InputForm({ onSubmit, numberOfLetters }) {
         onSubmit={(event) => onSubmit(event, formData)}
         className="flex gap-1"
       >
-        {[...Array(numberOfLetters).keys()].map((item, index) => {
+        {[...Array(parseInt(numberOfLetters)).keys()].map((item, index) => {
           return <InputField onChange={handleChange} key={index} id={index} />;
         })}
 

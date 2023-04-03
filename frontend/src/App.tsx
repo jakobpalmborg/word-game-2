@@ -2,12 +2,27 @@ import { useState, useEffect } from 'react';
 
 import InputForm from './components/InputForm';
 import HighscoreForm from './components/HighscoreForm';
-import StartGame from './components/StartGame';
 
 function App() {
   const [guess, setGuess] = useState('');
 
   const [guessListLetters, setGuessListLetters] = useState([]);
+  const [startFormData, setStartFormData] = useState({
+    numberOfLetters: 5,
+    noDuplicate: true,
+  });
+
+  const [gameStarted, setGameStarted] = useState(false);
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setStartFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: value,
+      };
+    });
+  }
 
   useEffect(() => {
     async function getFeedback() {
@@ -31,10 +46,51 @@ function App() {
     );
   }
 
+  let width: string =
+    startFormData.numberOfLetters === 3
+      ? 'w-52'
+      : startFormData.numberOfLetters === 4
+      ? 'w-60'
+      : 'w-80';
+
   return (
     <>
-      <StartGame />
-      <ul className="flex justify-center gap-1 w-80 m-auto flex-wrap">
+      <div className="text-center">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            setGameStarted(true);
+          }}
+        >
+          <div>
+            <label className=" mr-1 " htmlFor="numLetters">
+              Number of Lettters:
+            </label>
+            <select
+              id="numLetters"
+              name="numberOfLetters"
+              value={startFormData.numberOfLetters}
+              onChange={handleChange}
+            >
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+            </select>
+          </div>
+          <div>
+            <label className=" mr-1 " htmlFor="noDuplicate">
+              No Duplicate Letters
+            </label>
+            <input type="checkbox" id="noDuplicate" />
+          </div>
+          <button className="border-2 rounded-lg px-2 bg-sky-700 text-white">
+            Start Game
+          </button>
+        </form>
+      </div>
+
+      <ul className={`${width} flex justify-center gap-1 m-auto flex-wrap`}>
         {guessListLetters.map((item, index) => (
           <div
             key={index}
@@ -57,7 +113,13 @@ function App() {
         ))}
       </ul>
 
-      <InputForm onSubmit={handleSubmit} />
+      {gameStarted && (
+        <InputForm
+          onSubmit={handleSubmit}
+          numberOfLetters={startFormData.numberOfLetters}
+        />
+      )}
+
       <HighscoreForm />
     </>
   );

@@ -15,7 +15,6 @@ router.get('/api/feedback', async (req, res) => {
 // Highscore GET (name, time, guesses, wordLength, duplicate)
 async function getHighscore() {
   let response = await Highscore.find();
-  console.log(response);
   let data = JSON.parse(JSON.stringify(response));
   return data;
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import InputForm from './components/InputForm';
 import HighscoreForm from './components/HighscoreForm';
+import StartGame from './components/StartGame';
 
 function App() {
   const [guess, setGuess] = useState('');
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <>
+      <StartGame />
       <ul className="flex justify-center gap-1 w-80 m-auto flex-wrap">
         {guessListLetters.map((item, index) => (
           <div

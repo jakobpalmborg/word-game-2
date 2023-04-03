@@ -9,17 +9,17 @@ function App() {
   const [guessListLetters, setGuessListLetters] = useState([]);
   const [startFormData, setStartFormData] = useState({
     numberOfLetters: 5,
-    noDuplicate: true,
+    noDuplicate: false,
   });
 
   const [gameStarted, setGameStarted] = useState(false);
 
   function handleChange(event) {
-    const { name, value } = event.target;
+    const { name, value, checked, type } = event.target;
     setStartFormData((prevFormData) => {
       return {
         ...prevFormData,
-        [name]: value,
+        [name]: type === 'checkbox' ? checked : value,
       };
     });
   }
@@ -82,7 +82,13 @@ function App() {
             <label className=" mr-1 " htmlFor="noDuplicate">
               No Duplicate Letters
             </label>
-            <input type="checkbox" id="noDuplicate" />
+            <input
+              type="checkbox"
+              id="noDuplicate"
+              name="noDuplicate"
+              checked={startFormData.noDuplicate}
+              onChange={handleChange}
+            />
           </div>
           <button className="border-2 rounded-lg px-2 bg-sky-700 text-white">
             Start Game

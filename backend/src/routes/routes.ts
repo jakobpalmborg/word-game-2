@@ -4,27 +4,41 @@ import mongoose from 'mongoose';
 import { Highscore } from '../models.js';
 import getRandomWord from '../controllers/getRandomWord.js';
 import commonEnglishWords from '../controllers/commonEnglishWords.js';
+import * as uuid from 'uuid';
 
 mongoose.connect(process.env.MONGODB_URL);
 
 const router = Router();
 
+const GAMES = [];
+
+// START GAME
 router.post('/api/games', async (req, res) => {
-  console.log(req.body);
   const game = {
     correctWord: getRandomWord(
       commonEnglishWords.commonWords,
       parseInt(req.body.numberOfLetters),
       req.body.noDuplicate
     ),
+    guesses: [],
+    startTime: new Date(),
+    id: uuid.v4(),
   };
 
-  res.status(201).json({ game: game.correctWord });
+  GAMES.push(game);
+
+  res.status(201).json({ id: game.id });
 });
 
-// /feedback
-router.get('/api/feedback', async (req, res) => {
-  res.json(await feedback('fiska', req.query.guess));
+// POST GUESS
+router.post('/api/games/:id/guesses', async (req, res) => {
+  const game = GAMES.find((savedGame) => savedGame.id == req.params.id);
+  if (game) {
+    const guess = req.body.guess;
+    game.guesses.push(guess);
+  }
+  let result = await feedback(game.correctWord, req.body.guess);
+  res.status(201).json(result);
 });
 
 // Highscore GET (name, time, guesses, wordLength, duplicate)
@@ -46,8 +60,5 @@ router.post('/api/highscore', async (req, res) => {
 
   res.status(201).json({ data: req.body });
 });
-
-// /start (choose a new word to play with)
-//  get noDuplicate and Length
 
 export default router;

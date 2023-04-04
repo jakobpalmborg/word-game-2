@@ -5,15 +5,12 @@ import HighscoreForm from './components/HighscoreForm';
 import StartGame from './components/StartGame';
 
 function App() {
-  const [guess, setGuess] = useState('');
-  const firstUpdate = useRef(true);
-
+  const [gameId, setGameId] = useState(null);
   const [guessListLetters, setGuessListLetters] = useState([]);
   const [startFormData, setStartFormData] = useState({
     numberOfLetters: 5,
     noDuplicate: false,
   });
-
   const [gameStarted, setGameStarted] = useState(false);
 
   function handleChange(event) {
@@ -33,29 +30,29 @@ function App() {
       body: JSON.stringify(startFormData),
     });
     const data = await res.json();
-    console.log(data);
+    setGameId(data.id);
   }
-
-  useEffect(() => {
-    async function getFeedback() {
-      const res = await fetch(`./api/feedback?guess=${guess}`);
-      const payload = await res.json();
-      setGuessListLetters([...guessListLetters, ...payload]);
-    }
-    getFeedback();
-  }, [guess]);
 
   function handleSubmit(event, formData) {
     event.preventDefault();
-    setGuess(
-      [
-        formData.letter0,
-        formData.letter1,
-        formData.letter2,
-        formData.letter3,
-        formData.letter4,
-      ].join('')
-    );
+    let guess = [
+      formData.letter0,
+      formData.letter1,
+      formData.letter2,
+      formData.letter3,
+      formData.letter4,
+    ].join('');
+    getFeedback(guess);
+  }
+
+  async function getFeedback(guess) {
+    const res = await fetch(`./api/games/${gameId}/guesses`, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ guess: guess }),
+    });
+    const data = await res.json();
+    setGuessListLetters([...guessListLetters, ...data]);
   }
 
   // for styling the guesses depending on number of letters

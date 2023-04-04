@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import InputForm from './components/InputForm';
 import HighscoreForm from './components/HighscoreForm';
+import StartGame from './components/StartGame';
 
 function App() {
   const [guess, setGuess] = useState('');
@@ -57,46 +58,11 @@ function App() {
   return (
     <>
       {!gameStarted && (
-        <div className="text-center">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-
-              setGameStarted(true);
-            }}
-          >
-            <div>
-              <label className=" mr-1 " htmlFor="numLetters">
-                Number of Lettters:
-              </label>
-              <select
-                id="numLetters"
-                name="numberOfLetters"
-                value={startFormData.numberOfLetters}
-                onChange={handleChange}
-              >
-                <option value={3}>3</option>
-                <option value={4}>4</option>
-                <option value={5}>5</option>
-              </select>
-            </div>
-            <div>
-              <label className=" mr-1 " htmlFor="noDuplicate">
-                No Duplicate Letters
-              </label>
-              <input
-                type="checkbox"
-                id="noDuplicate"
-                name="noDuplicate"
-                checked={startFormData.noDuplicate}
-                onChange={handleChange}
-              />
-            </div>
-            <button className="border-2 rounded-lg px-2 bg-sky-700 text-white">
-              Start Game
-            </button>
-          </form>
-        </div>
+        <StartGame
+          onStartGame={setGameStarted}
+          startFormData={startFormData}
+          onChange={handleChange}
+        />
       )}
 
       <ul className={`${width} flex justify-center gap-1 m-auto flex-wrap`}>

@@ -1,10 +1,7 @@
 import { useState } from 'react';
 import InputField from './InputField';
 
-export default function InputForm({ onSubmit }) {
-  let numberOfFields: number[] = [0, 1, 2, 3, 4];
-
-  // const [letter, setLetter] = useState('');
+export default function InputForm({ onSubmit, numberOfLetters }) {
   const [formData, setFormData] = useState({
     letter0: '',
     letter1: '',
@@ -21,22 +18,21 @@ export default function InputForm({ onSubmit }) {
         [name]: value,
       };
     });
-    // setLetter(event.target.value);
   }
 
   return (
-    <div className="flex my-2 justify-center ml-11">
+    <div className="flex my-2 justify-center ml-14">
       <form
         onSubmit={(event) => onSubmit(event, formData)}
         className="flex gap-1"
       >
-        {numberOfFields.map((item, index) => {
+        {[...Array(parseInt(numberOfLetters)).keys()].map((item, index) => {
           return <InputField onChange={handleChange} key={index} id={index} />;
         })}
 
         <button
           type="submit"
-          className=" border-2 border-black rounded-full h-7 m-auto px-1"
+          className=" border-2 rounded-lg px-2 bg-sky-700 text-white h-7 m-auto ml-1"
         >
           GO!
         </button>

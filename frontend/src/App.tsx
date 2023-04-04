@@ -2,11 +2,28 @@ import { useState, useEffect } from 'react';
 
 import InputForm from './components/InputForm';
 import HighscoreForm from './components/HighscoreForm';
+import StartGame from './components/StartGame';
 
 function App() {
   const [guess, setGuess] = useState('');
 
   const [guessListLetters, setGuessListLetters] = useState([]);
+  const [startFormData, setStartFormData] = useState({
+    numberOfLetters: 5,
+    noDuplicate: false,
+  });
+
+  const [gameStarted, setGameStarted] = useState(false);
+
+  function handleChange(event) {
+    const { name, value, checked, type } = event.target;
+    setStartFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: type === 'checkbox' ? checked : value,
+      };
+    });
+  }
 
   useEffect(() => {
     async function getFeedback() {
@@ -30,9 +47,25 @@ function App() {
     );
   }
 
+  // for styling the guesses depending on number of letters
+  let width: string =
+    startFormData.numberOfLetters == 3
+      ? 'w-52'
+      : startFormData.numberOfLetters == 4
+      ? 'w-60'
+      : 'w-80';
+
   return (
     <>
-      <ul className="flex justify-center gap-1 w-80 m-auto flex-wrap">
+      {!gameStarted && (
+        <StartGame
+          onStartGame={setGameStarted}
+          startFormData={startFormData}
+          onChange={handleChange}
+        />
+      )}
+
+      <ul className={`${width} flex justify-center gap-1 m-auto flex-wrap`}>
         {guessListLetters.map((item, index) => (
           <div
             key={index}
@@ -55,7 +88,13 @@ function App() {
         ))}
       </ul>
 
-      <InputForm onSubmit={handleSubmit} />
+      {gameStarted && (
+        <InputForm
+          onSubmit={handleSubmit}
+          numberOfLetters={startFormData.numberOfLetters}
+        />
+      )}
+
       <HighscoreForm />
     </>
   );

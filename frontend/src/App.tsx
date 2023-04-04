@@ -49,9 +49,9 @@ function App() {
 
   // for styling the guesses depending on number of letters
   let width: string =
-    startFormData.numberOfLetters === 3
+    startFormData.numberOfLetters == 3
       ? 'w-52'
-      : startFormData.numberOfLetters === 4
+      : startFormData.numberOfLetters == 4
       ? 'w-60'
       : 'w-80';
 

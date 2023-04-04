@@ -12,8 +12,6 @@ function App() {
     noDuplicate: false,
   });
 
-  console.log(startFormData.numberOfLetters);
-
   const [gameStarted, setGameStarted] = useState(false);
 
   function handleChange(event) {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import InputForm from './components/InputForm';
 import HighscoreForm from './components/HighscoreForm';
@@ -6,6 +6,7 @@ import StartGame from './components/StartGame';
 
 function App() {
   const [guess, setGuess] = useState('');
+  const firstUpdate = useRef(true);
 
   const [guessListLetters, setGuessListLetters] = useState([]);
   const [startFormData, setStartFormData] = useState({
@@ -23,6 +24,16 @@ function App() {
         [name]: type === 'checkbox' ? checked : value,
       };
     });
+  }
+
+  async function startGame() {
+    const res = await fetch('./api/games', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(startFormData),
+    });
+    const data = await res.json();
+    console.log(data);
   }
 
   useEffect(() => {
@@ -62,6 +73,7 @@ function App() {
           onStartGame={setGameStarted}
           startFormData={startFormData}
           onChange={handleChange}
+          onClick={startGame}
         />
       )}
 

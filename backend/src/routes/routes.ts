@@ -2,10 +2,25 @@ import { Router } from 'express';
 import feedback from '../controllers/feedback.js';
 import mongoose from 'mongoose';
 import { Highscore } from '../models.js';
+import getRandomWord from '../controllers/getRandomWord.js';
+import commonEnglishWords from '../controllers/commonEnglishWords.js';
 
 mongoose.connect(process.env.MONGODB_URL);
 
 const router = Router();
+
+router.post('/api/games', async (req, res) => {
+  console.log(req.body);
+  const game = {
+    correctWord: getRandomWord(
+      commonEnglishWords.commonWords,
+      parseInt(req.body.numberOfLetters),
+      req.body.noDuplicate
+    ),
+  };
+
+  res.status(201).json({ game: game.correctWord });
+});
 
 // /feedback
 router.get('/api/feedback', async (req, res) => {

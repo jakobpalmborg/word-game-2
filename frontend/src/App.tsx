@@ -12,7 +12,7 @@ function App() {
     noDuplicate: false,
   });
   const [gameStarted, setGameStarted] = useState(false);
-  const [win, setWin] = useState(false);
+  const [win, setWin] = useState(true);
 
   function handleChange(event) {
     const { name, value, checked, type } = event.target;
@@ -116,7 +116,7 @@ function App() {
         />
       )}
 
-      {win && <HighscoreForm />}
+      {win && <HighscoreForm gameId={gameId} startFormData={startFormData} />}
     </>
   );
 }

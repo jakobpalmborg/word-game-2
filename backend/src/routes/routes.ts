@@ -21,8 +21,10 @@ router.post('/api/games', async (req, res) => {
       req.body.noDuplicate
     ),
     guesses: [],
-    startTime: new Date(),
+    wordLength: parseInt(req.body.numberOfLetters),
+    noDuplicate: req.body.noDuplicate,
     id: uuid.v4(),
+    startTime: new Date(),
   };
 
   GAMES.push(game);
@@ -59,8 +61,18 @@ router.get('/highscore', async (req, res) => {
 });
 
 //  Highscore POST
-router.post('/api/highscore', async (req, res) => {
-  const highscore = new Highscore(req.body);
+router.post('/api/highscore/:id/highscore', async (req, res) => {
+  const game = GAMES.find((savedGame) => savedGame.id == req.params.id);
+
+  let highscoreObj = {
+    name: req.body.name,
+    time: (game.endTime - game.startTime) / 1000,
+    guesses: game.guesses.length,
+    wordLength: game.wordLength,
+    noDuplicate: game.noDuplicate,
+  };
+
+  const highscore = new Highscore(highscoreObj);
   await highscore.save();
 
   res.status(201).json({ data: req.body });

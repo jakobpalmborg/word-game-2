@@ -12,6 +12,7 @@ function App() {
     noDuplicate: false,
   });
   const [gameStarted, setGameStarted] = useState(false);
+  const [win, setWin] = useState(false);
 
   function handleChange(event) {
     const { name, value, checked, type } = event.target;
@@ -52,6 +53,17 @@ function App() {
       body: JSON.stringify({ guess: guess }),
     });
     const data = await res.json();
+    console.log(data);
+    let numberOfCorrect: number = 0;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].result === 'correct') {
+        numberOfCorrect++;
+      }
+    }
+    if (numberOfCorrect === data.length) {
+      setWin(true);
+    } else {
+    }
     setGuessListLetters([...guessListLetters, ...data]);
   }
 
@@ -104,7 +116,7 @@ function App() {
         />
       )}
 
-      <HighscoreForm />
+      {win && <HighscoreForm />}
     </>
   );
 }

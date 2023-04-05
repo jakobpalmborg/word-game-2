@@ -37,8 +37,14 @@ router.post('/api/games/:id/guesses', async (req, res) => {
     const guess = req.body.guess;
     game.guesses.push(guess);
   }
+
   let result = await feedback(game.correctWord, req.body.guess);
-  res.status(201).json(result);
+  if (req.body.guess === game.correctWord) {
+    game.endTime = new Date();
+    res.status(201).json(result);
+  } else {
+    res.status(201).json(result);
+  }
 });
 
 // Highscore GET (name, time, guesses, wordLength, duplicate)

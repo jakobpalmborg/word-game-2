@@ -50,7 +50,7 @@ router.post('/api/games/:id/guesses', async (req, res) => {
 
 // Highscore GET (name, time, guesses, wordLength, duplicate)
 async function getHighscore() {
-  let response = await Highscore.find();
+  let response = await Highscore.find().sort({ time: 1 });
   let data = JSON.parse(JSON.stringify(response));
   return data;
 }

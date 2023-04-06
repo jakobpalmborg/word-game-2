@@ -1,8 +1,18 @@
-<ul class="text-center">
-  {{#each highscores}}
-    <li class='my-2 border-2 rounded-md'><span class='px-2'>Name:
-        {{this.name}}</span class='px-2'><span>Time: {{this.time}}</span><span class='px-2'>Guesses:
-        {{this.guesses}}</span>
-    </li>
-  {{/each}}
-</ul>
+<div class='m-auto mx-10'>
+  <ol class='list-decimal'>
+    {{#each highscores}}
+      <li class='my-2 border-2 rounded-md text-center'>
+        Name:<span class='px-2 font-bold'> {{this.name}}</span>
+        Time:<span class='px-2 font-bold'> {{this.time}}</span>
+        Guesses:<span class='px-2 font-bold'> {{this.guesses}}</span>
+        <br />
+        <span class='text-sm'> {{this.wordLength}} Letter Word</span>
+        {{#if this.noDuplicate}}
+          <span class='text-sm'>With No Duplicates</span>
+        {{else}}
+          <span class='text-sm'>And Duplicates Allowed</span>
+        {{/if}}
+      </li>
+    {{/each}}
+  </ol>
+</div>

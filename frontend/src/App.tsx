@@ -12,7 +12,7 @@ function App() {
     noDuplicate: false,
   });
   const [gameStarted, setGameStarted] = useState(false);
-  const [win, setWin] = useState(true);
+  const [win, setWin] = useState(false);
 
   function handleChange(event) {
     const { name, value, checked, type } = event.target;

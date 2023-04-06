@@ -521,6 +521,15 @@ video {
   bottom: 0px;
 }
 
+.m-auto {
+  margin: auto;
+}
+
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -540,6 +549,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.list-decimal {
+  list-style-type: decimal;
 }
 
 .justify-evenly {
@@ -580,6 +593,11 @@ video {
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .font-bold {

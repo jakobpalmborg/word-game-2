@@ -1,19 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import InputForm from './components/InputForm';
 import HighscoreForm from './components/HighscoreForm';
 import StartGame from './components/StartGame';
 
 function App() {
-  const [guess, setGuess] = useState('');
-
+  const [gameId, setGameId] = useState(null);
   const [guessListLetters, setGuessListLetters] = useState([]);
   const [startFormData, setStartFormData] = useState({
     numberOfLetters: 5,
     noDuplicate: false,
   });
-
   const [gameStarted, setGameStarted] = useState(false);
+  const [win, setWin] = useState(true);
 
   function handleChange(event) {
     const { name, value, checked, type } = event.target;
@@ -25,26 +24,47 @@ function App() {
     });
   }
 
-  useEffect(() => {
-    async function getFeedback() {
-      const res = await fetch(`./api/feedback?guess=${guess}`);
-      const payload = await res.json();
-      setGuessListLetters([...guessListLetters, ...payload]);
-    }
-    getFeedback();
-  }, [guess]);
+  async function startGame() {
+    const res = await fetch('./api/games', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(startFormData),
+    });
+    const data = await res.json();
+    setGameId(data.id);
+  }
 
   function handleSubmit(event, formData) {
     event.preventDefault();
-    setGuess(
-      [
-        formData.letter0,
-        formData.letter1,
-        formData.letter2,
-        formData.letter3,
-        formData.letter4,
-      ].join('')
-    );
+    let guess = [
+      formData.letter0,
+      formData.letter1,
+      formData.letter2,
+      formData.letter3,
+      formData.letter4,
+    ].join('');
+    getFeedback(guess);
+  }
+
+  async function getFeedback(guess) {
+    const res = await fetch(`./api/games/${gameId}/guesses`, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ guess: guess }),
+    });
+    const data = await res.json();
+    console.log(data);
+    let numberOfCorrect: number = 0;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].result === 'correct') {
+        numberOfCorrect++;
+      }
+    }
+    if (numberOfCorrect === data.length) {
+      setWin(true);
+    } else {
+    }
+    setGuessListLetters([...guessListLetters, ...data]);
   }
 
   // for styling the guesses depending on number of letters
@@ -62,6 +82,7 @@ function App() {
           onStartGame={setGameStarted}
           startFormData={startFormData}
           onChange={handleChange}
+          onClick={startGame}
         />
       )}
 
@@ -95,7 +116,7 @@ function App() {
         />
       )}
 
-      <HighscoreForm />
+      {win && <HighscoreForm gameId={gameId} startFormData={startFormData} />}
     </>
   );
 }

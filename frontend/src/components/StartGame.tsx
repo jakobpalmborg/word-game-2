@@ -1,6 +1,11 @@
 import React from 'react';
 
-export default function StartGame({ onStartGame, startFormData, onChange }) {
+export default function StartGame({
+  onStartGame,
+  startFormData,
+  onChange,
+  onClick,
+}) {
   return (
     <div className="text-center">
       <form
@@ -36,7 +41,10 @@ export default function StartGame({ onStartGame, startFormData, onChange }) {
             onChange={onChange}
           />
         </div>
-        <button className="border-2 rounded-lg px-2 bg-sky-700 text-white">
+        <button
+          onClick={onClick}
+          className="border-2 rounded-lg px-2 bg-sky-700 text-white"
+        >
           Start Game
         </button>
       </form>

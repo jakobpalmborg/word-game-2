@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-export default function HighscoreForm() {
+export default function HighscoreForm({ gameId, startFormData }) {
   const [highscoreFormData, setHighscoreFormData] = useState({
     name: '',
-    time: 0,
-    guesses: 0,
-    wordLength: 5,
-    noDuplicate: false,
+    wordLength: parseInt(startFormData.wordLength),
+    noDuplicate: startFormData.noDuplicate,
   });
 
   function handleChange(event) {
@@ -18,7 +16,7 @@ export default function HighscoreForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    fetch('./api/highscore', {
+    fetch(`./api/highscore/${gameId}/highscore`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(highscoreFormData),

@@ -5,7 +5,7 @@ import HighscoreForm from './components/HighscoreForm';
 import StartGame from './components/StartGame';
 
 function App() {
-  const [gameId, setGameId] = useState<String>('');
+  const [gameId, setGameId] = useState<string>('');
   const [guessListLetters, setGuessListLetters] = useState([]);
   const [startFormData, setStartFormData] = useState({
     numberOfLetters: 5,

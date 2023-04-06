@@ -9,9 +9,9 @@
     "back-dev": "concurrently \"npm run ts-watch\" \"npm run tw-watch\" \"npm run node-watch\" ",
     "node-watch": "nodemon dist/index.js",
     "ts-watch": "npx tsc -w",
-    "tw-watch": "npx tailwindcss -i ./src/css/input.css -o ./public/output.css --watch",
+    "tw-watch": "npx tailwindcss -i ./src/css/input.css -o ./dist/public/output.css --watch",
     "build-ts": "npx tsc",
-    "build-tw": "npx tailwindcss -i ./src/css/input.css -o ./public/output.css",
+    "build-tw": "npx tailwindcss -i ./src/css/input.css -o ./dist/public/output.css",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "author": "",

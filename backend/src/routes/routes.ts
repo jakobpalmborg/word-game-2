@@ -27,11 +27,11 @@ router.post('/api/games', async (req, res) => {
   const game: Game = {
     correctWord: getRandomWord(
       commonEnglishWords.commonWords,
-      parseInt(req.body.numberOfLetters),
+      req.body.numberOfLetters,
       req.body.noDuplicate
     ),
     guesses: [],
-    wordLength: parseInt(req.body.numberOfLetters),
+    wordLength: req.body.numberOfLetters,
     noDuplicate: req.body.noDuplicate,
     id: uuid.v4(),
     startTime: new Date(),

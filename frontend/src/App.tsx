@@ -7,7 +7,7 @@ import StartGame from './components/StartGame';
 function App() {
   const [gameId, setGameId] = useState('');
   const [guessListLetters, setGuessListLetters] = useState<
-    [] | [{ letter: String; result: string }]
+    [] | { letter: string; result: string }[]
   >([]);
   const [numChar, setNumChar] = useState(5);
   const [gameStarted, setGameStarted] = useState(false);

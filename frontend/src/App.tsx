@@ -26,8 +26,15 @@ function App() {
     setNumChar(startFormData.numberOfLetters);
   }
 
-  function handleSubmit(event, formData) {
-    event.preventDefault();
+  console.log(typeof numChar);
+
+  function handleSubmit(formData: {
+    letter0: string;
+    letter1: string;
+    letter2: string;
+    letter3: string;
+    letter4: string;
+  }) {
     let guess = [
       formData.letter0,
       formData.letter1,

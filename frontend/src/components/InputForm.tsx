@@ -1,7 +1,19 @@
 import { useState } from 'react';
 import InputField from './InputField';
 
-export default function InputForm({ onSubmit, numberOfLetters }) {
+export default function InputForm({
+  onSubmit,
+  numberOfLetters,
+}: {
+  onSubmit: (formData: {
+    letter0: string;
+    letter1: string;
+    letter2: string;
+    letter3: string;
+    letter4: string;
+  }) => void;
+  numberOfLetters: number;
+}) {
   const [formData, setFormData] = useState({
     letter0: '',
     letter1: '',
@@ -10,8 +22,8 @@ export default function InputForm({ onSubmit, numberOfLetters }) {
     letter4: '',
   });
 
-  function handleChange(event) {
-    const { name, value } = event.target;
+  function handleChange(event: React.FormEvent<HTMLInputElement>) {
+    const { name, value } = event.target as HTMLInputElement;
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
@@ -20,13 +32,18 @@ export default function InputForm({ onSubmit, numberOfLetters }) {
     });
   }
 
+  console.log(typeof numberOfLetters);
+
   return (
     <div className="flex my-2 justify-center ml-14">
       <form
-        onSubmit={(event) => onSubmit(event, formData)}
+        onSubmit={(event) => {
+          event.preventDefault();
+          onSubmit(formData);
+        }}
         className="flex gap-1"
       >
-        {[...Array(parseInt(numberOfLetters)).keys()].map((item, index) => {
+        {[...Array(numberOfLetters).keys()].map((item, index) => {
           return <InputField onChange={handleChange} key={index} id={index} />;
         })}
 

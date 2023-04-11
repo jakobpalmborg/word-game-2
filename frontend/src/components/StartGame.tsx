@@ -13,16 +13,6 @@ export default function StartGame({
     noDuplicate: false,
   });
 
-  // function handleChange(event) {
-  //   const { name, value, checked, type } = event.target;
-  //   setStartFormData((prevFormData) => {
-  //     return {
-  //       ...prevFormData,
-  //       [name]: type === 'checkbox' ? checked : value,
-  //     };
-  //   });
-  // }
-
   return (
     <div className="text-center">
       <form
@@ -44,7 +34,7 @@ export default function StartGame({
               setStartFormData((prevFormData) => {
                 return {
                   ...prevFormData,
-                  [name]: value,
+                  [name]: parseInt(value),
                 };
               });
             }}

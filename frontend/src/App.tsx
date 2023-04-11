@@ -5,26 +5,16 @@ import HighscoreForm from './components/HighscoreForm';
 import StartGame from './components/StartGame';
 
 function App() {
-  const [gameId, setGameId] = useState<string>('');
+  const [gameId, setGameId] = useState(null);
   const [guessListLetters, setGuessListLetters] = useState([]);
-  const [startFormData, setStartFormData] = useState({
-    numberOfLetters: 5,
-    noDuplicate: false,
-  });
+  const [numChar, setNumChar] = useState(5);
   const [gameStarted, setGameStarted] = useState(false);
   const [win, setWin] = useState(false);
 
-  function handleChange(event) {
-    const { name, value, checked, type } = event.target;
-    setStartFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [name]: type === 'checkbox' ? checked : value,
-      };
-    });
-  }
-
-  async function startGame() {
+  async function startGame(startFormData: {
+    numberOfLetters: number;
+    noDuplicate: boolean;
+  }) {
     const res = await fetch('./api/games', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -32,6 +22,8 @@ function App() {
     });
     const data = await res.json();
     setGameId(data.id);
+    setGameStarted(true);
+    setNumChar(startFormData.numberOfLetters);
   }
 
   function handleSubmit(event, formData) {
@@ -68,23 +60,11 @@ function App() {
   }
 
   // for styling the guesses depending on number of letters
-  let width: string =
-    startFormData.numberOfLetters == 3
-      ? 'w-52'
-      : startFormData.numberOfLetters == 4
-      ? 'w-60'
-      : 'w-80';
+  let width: string = numChar == 3 ? 'w-52' : numChar == 4 ? 'w-60' : 'w-80';
 
   return (
     <>
-      {!gameStarted && (
-        <StartGame
-          onStartGame={setGameStarted}
-          startFormData={startFormData}
-          onChange={handleChange}
-          onClick={startGame}
-        />
-      )}
+      {!gameStarted && <StartGame onStartGame={startGame} />}
 
       <ul className={`${width} flex justify-center gap-1 m-auto flex-wrap`}>
         {guessListLetters.map((item, index) => (
@@ -110,13 +90,10 @@ function App() {
       </ul>
 
       {gameStarted && (
-        <InputForm
-          onSubmit={handleSubmit}
-          numberOfLetters={startFormData.numberOfLetters}
-        />
+        <InputForm onSubmit={handleSubmit} numberOfLetters={numChar} />
       )}
 
-      {win && <HighscoreForm gameId={gameId} startFormData={startFormData} />}
+      {win && <HighscoreForm gameId={gameId} />}
     </>
   );
 }

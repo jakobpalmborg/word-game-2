@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-export default function HighscoreForm({
-  gameId,
-  startFormData,
-}: {
-  gameId: string;
-  startFormData: { wordLength: number; noDuplicate: boolean };
-}) {
+export default function HighscoreForm({ gameId }: { gameId: string }) {
   const [highscoreFormData, setHighscoreFormData] = useState({
     name: '',
-    wordLength: startFormData.wordLength,
-    noDuplicate: startFormData.noDuplicate,
   });
 
   return (

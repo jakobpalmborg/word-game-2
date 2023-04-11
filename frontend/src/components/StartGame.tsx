@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function StartGame({
   onStartGame,
-  startFormData,
-  onChange,
-  onClick,
+}: {
+  onStartGame: (startFormData: {
+    numberOfLetters: number;
+    noDuplicate: boolean;
+  }) => void;
 }) {
+  const [startFormData, setStartFormData] = useState({
+    numberOfLetters: 5,
+    noDuplicate: false,
+  });
+
   return (
     <div className="text-center">
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          onStartGame(true);
+          onStartGame(startFormData);
         }}
       >
         <div>
@@ -22,7 +29,15 @@ export default function StartGame({
             id="numLetters"
             name="numberOfLetters"
             value={startFormData.numberOfLetters}
-            onChange={onChange}
+            onChange={(event) => {
+              const { name, value } = event.target;
+              setStartFormData((prevFormData) => {
+                return {
+                  ...prevFormData,
+                  [name]: parseInt(value),
+                };
+              });
+            }}
           >
             <option value={3}>3</option>
             <option value={4}>4</option>
@@ -38,13 +53,18 @@ export default function StartGame({
             id="noDuplicate"
             name="noDuplicate"
             checked={startFormData.noDuplicate}
-            onChange={onChange}
+            onChange={(event) => {
+              const { name, checked } = event.target;
+              setStartFormData((prevFormData) => {
+                return {
+                  ...prevFormData,
+                  [name]: checked,
+                };
+              });
+            }}
           />
         </div>
-        <button
-          onClick={onClick}
-          className="border-2 rounded-lg px-2 bg-sky-700 text-white"
-        >
+        <button className="border-2 rounded-lg px-2 bg-sky-700 text-white">
           Start Game
         </button>
       </form>

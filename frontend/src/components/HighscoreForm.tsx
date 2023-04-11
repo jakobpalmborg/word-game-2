@@ -1,34 +1,30 @@
 import React, { useState, useEffect } from 'react';
 
-export default function HighscoreForm({ gameId, startFormData }) {
+export default function HighscoreForm({ gameId }: { gameId: string }) {
   const [highscoreFormData, setHighscoreFormData] = useState({
     name: '',
-    wordLength: parseInt(startFormData.wordLength),
-    noDuplicate: startFormData.noDuplicate,
   });
-
-  function handleChange(event) {
-    setHighscoreFormData((prevData) => ({
-      ...prevData,
-      name: event.target.value,
-    }));
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    fetch(`./api/highscore/${gameId}/highscore`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(highscoreFormData),
-    });
-  }
 
   return (
     <div className=" text-center">
       <h2 className="font-bold text-lg p-2">Highscore</h2>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          fetch(`./api/highscore/${gameId}/highscore`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(highscoreFormData),
+          });
+        }}
+      >
         <input
-          onChange={handleChange}
+          onChange={(event) => {
+            setHighscoreFormData((prevData) => ({
+              ...prevData,
+              name: event.target.value,
+            }));
+          }}
           type="text"
           placeholder="Name"
           name="name"

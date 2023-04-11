@@ -18,12 +18,4 @@ const highscoreSchema = new mongoose.Schema<IHighscore>({
 
 const Highscore = mongoose.model<IHighscore>('Highscore', highscoreSchema);
 
-// const Highscore: = mongoose.model('Highscore', {
-//   name: String,
-//   time: Number,
-//   guesses: Number,
-//   wordLength: Number,
-//   noDuplicate: Boolean,
-// });
-
 export { Highscore };

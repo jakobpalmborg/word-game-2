@@ -11,7 +11,7 @@ app.set('views', './src/templates/');
 app.set('partials', './templates/partials');
 app.use('/', routes);
 app.use(express.static('../frontend/dist'));
-app.use(express.static('./public'));
+app.use(express.static('./dist/public'));
 app.get('*', (req, res) => {
   res.send('404 page not found');
 });

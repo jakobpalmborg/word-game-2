@@ -6,15 +6,25 @@ import getRandomWord from '../controllers/getRandomWord.js';
 import commonEnglishWords from '../controllers/commonEnglishWords.js';
 import * as uuid from 'uuid';
 
-mongoose.connect(process.env.MONGODB_URL);
+mongoose.connect(`${process.env.MONGODB_URL}`);
 
 const router = Router();
 
-const GAMES = [];
+type Game = {
+  correctWord: string;
+  guesses: string[];
+  wordLength: number;
+  noDuplicate: boolean;
+  id: string;
+  startTime: Date;
+  endTime?: Date;
+};
+
+const GAMES: Game[] = [];
 
 // START GAME
 router.post('/api/games', async (req, res) => {
-  const game = {
+  const game: Game = {
     correctWord: getRandomWord(
       commonEnglishWords.commonWords,
       parseInt(req.body.numberOfLetters),
@@ -39,12 +49,14 @@ router.post('/api/games/:id/guesses', async (req, res) => {
     const guess = req.body.guess;
     game.guesses.push(guess);
   }
-  let result = await feedback(game.correctWord, req.body.guess);
-  if (req.body.guess === game.correctWord) {
-    game.endTime = new Date();
-    res.status(201).json(result);
-  } else {
-    res.status(201).json(result);
+  if (game !== undefined) {
+    let result = await feedback(game.correctWord, req.body.guess);
+    if (req.body.guess === game.correctWord) {
+      game.endTime = new Date();
+      res.status(201).json(result);
+    } else {
+      res.status(201).json(result);
+    }
   }
 });
 
@@ -64,16 +76,24 @@ router.get('/highscore', async (req, res) => {
 router.post('/api/highscore/:id/highscore', async (req, res) => {
   const game = GAMES.find((savedGame) => savedGame.id == req.params.id);
 
-  let highscoreObj = {
-    name: req.body.name,
-    time: (game.endTime - game.startTime) / 1000,
-    guesses: game.guesses.length,
-    wordLength: game.wordLength,
-    noDuplicate: game.noDuplicate,
-  };
+  if (game !== undefined) {
+    let highscoreObj: {
+      name: string;
+      time: number;
+      guesses: number;
+      wordLength: number;
+      noDuplicate: boolean;
+    } = {
+      name: req.body.name,
+      time: (game.endTime!.getTime() - game.startTime.getTime()) / 1000,
+      guesses: game.guesses.length,
+      wordLength: game.wordLength,
+      noDuplicate: game.noDuplicate,
+    };
 
-  const highscore = new Highscore(highscoreObj);
-  await highscore.save();
+    const highscore = new Highscore(highscoreObj);
+    await highscore.save();
+  }
 
   res.status(201).json({ data: req.body });
 });

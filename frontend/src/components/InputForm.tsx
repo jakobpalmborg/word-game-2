@@ -32,8 +32,6 @@ export default function InputForm({
     });
   }
 
-  console.log(typeof numberOfLetters);
-
   return (
     <div className="flex my-2 justify-center ml-14">
       <form

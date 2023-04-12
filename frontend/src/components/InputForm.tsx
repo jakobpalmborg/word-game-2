@@ -24,6 +24,11 @@ export default function InputForm({
 
   function handleChange(event: React.FormEvent<HTMLInputElement>) {
     const { name, value } = event.target as HTMLInputElement;
+    const element = event.target as HTMLElement;
+    const nextSibling = element.nextElementSibling as HTMLElement;
+    if (value.length === 1) {
+      nextSibling ? nextSibling.focus() : element.blur();
+    }
     setFormData((prevFormData) => {
       return {
         ...prevFormData,

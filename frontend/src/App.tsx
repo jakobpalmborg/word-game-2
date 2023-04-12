@@ -12,7 +12,6 @@ function App() {
   const [numChar, setNumChar] = useState(5);
   const [gameStarted, setGameStarted] = useState(false);
   const [win, setWin] = useState(false);
-
   async function startGame(startFormData: {
     numberOfLetters: number;
     noDuplicate: boolean;
@@ -23,6 +22,8 @@ function App() {
       body: JSON.stringify(startFormData),
     });
     const data = await res.json();
+    setGuessListLetters([]);
+    setWin(false);
     setGameId(data.id);
     setGameStarted(true);
     setNumChar(startFormData.numberOfLetters);
@@ -61,6 +62,7 @@ function App() {
     }
     if (numberOfCorrect === data.length) {
       setWin(true);
+      setGameStarted(false);
     }
     setGuessListLetters([...guessListLetters, ...data]);
   }
@@ -79,10 +81,10 @@ function App() {
             // logic to handle the result from api
             className={
               item.result === 'correct'
-                ? 'bg-green-700'
+                ? ' bg-green-500'
                 : item.result === 'missplaced'
-                ? 'bg-yellow-500'
-                : 'bg-gray-400'
+                ? 'bg-yellow-400'
+                : 'bg-gray-300'
             }
           >
             <li

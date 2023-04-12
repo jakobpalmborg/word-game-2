@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-
 import InputForm from './components/InputForm';
 import HighscoreForm from './components/HighscoreForm';
 import StartGame from './components/StartGame';
@@ -12,6 +11,7 @@ function App() {
   const [numChar, setNumChar] = useState(5);
   const [gameStarted, setGameStarted] = useState(false);
   const [win, setWin] = useState(false);
+
   async function startGame(startFormData: {
     numberOfLetters: number;
     noDuplicate: boolean;
@@ -60,7 +60,7 @@ function App() {
         numberOfCorrect++;
       }
     }
-    if (numberOfCorrect === data.length) {
+    if (numberOfCorrect === numChar) {
       setWin(true);
       setGameStarted(false);
     }
@@ -78,7 +78,7 @@ function App() {
         {guessListLetters.map((item, index) => (
           <div
             key={index}
-            // logic to handle the result from api
+            // for rendering the result
             className={
               item.result === 'correct'
                 ? ' bg-green-500'

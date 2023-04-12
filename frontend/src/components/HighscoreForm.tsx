@@ -29,6 +29,7 @@ export default function HighscoreForm({ gameId }: { gameId: string }) {
           type="text"
           placeholder="Name"
           name="name"
+          required
           className="border-2 rounded-lg pl-1"
         />
         <button className="ml-1 border-2 rounded-lg px-2 bg-sky-700 text-white">

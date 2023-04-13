@@ -1,7 +1,7 @@
-<div class='m-auto mx-10'>
-  <ol class='list-decimal'>
+<div class='m-auto mx-10 text-center'>
+  <ol class='list-decimal inline-block text-left'>
     {{#each highscores}}
-      <li class='my-2 border-2 rounded-md text-center'>
+      <li>
         Name:<span class='px-2 font-bold'> {{this.name}}</span>
         Time:<span class='px-2 font-bold'> {{this.time}}</span>
         Guesses:<span class='px-2 font-bold'> {{this.guesses}}</span>
@@ -13,6 +13,7 @@
           <span class='text-sm'>And Duplicates Allowed</span>
         {{/if}}
       </li>
+      <div class='bg-black h-0.5 my-2'></div>
     {{/each}}
   </ol>
 </div>

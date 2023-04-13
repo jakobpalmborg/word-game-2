@@ -76,12 +76,14 @@ function App() {
     <>
       {!gameStarted && <StartGame onStartGame={startGame} />}
 
+      {!gameStarted && <div className="bg-black h-0.5 w-4/6 m-auto mb-2"></div>}
+
       <GuessListLetters guessListLetters={guessListLetters} numChar={numChar} />
 
       {gameStarted && (
         <InputForm onSubmit={handleSubmit} numberOfLetters={numChar} />
       )}
-
+      {win && <div className="bg-black h-0.5 w-4/6 m-auto mt-2"></div>}
       {win && (
         <HighscoreForm
           gameId={gameId}

@@ -14,15 +14,15 @@ export default function StartGame({
   });
 
   return (
-    <div className="text-center">
+    <div className="text-center my-2">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           onStartGame(startFormData);
         }}
       >
-        <div>
-          <label className=" mr-1 " htmlFor="numLetters">
+        <div className="my-2">
+          <label className=" mr-1" htmlFor="numLetters">
             Number of Lettters:
           </label>
           <select
@@ -45,8 +45,8 @@ export default function StartGame({
           </select>
         </div>
         <div>
-          <label className=" mr-1 " htmlFor="noDuplicate">
-            No Duplicate Letters
+          <label className=" mr-2" htmlFor="noDuplicate">
+            No Duplicate Letters:
           </label>
           <input
             type="checkbox"
@@ -64,7 +64,7 @@ export default function StartGame({
             }}
           />
         </div>
-        <button className="border-2 rounded-lg px-2 bg-sky-700 text-white">
+        <button className="border-2 rounded-lg px-2 bg-sky-700 text-white my-2">
           Start Game
         </button>
       </form>

@@ -64,7 +64,7 @@ export default function StartGame({
             }}
           />
         </div>
-        <button className="border-2 rounded-lg px-2 bg-sky-700 text-white my-2">
+        <button className=" rounded-md py-1 px-4 bg-sky-700 text-white my-2">
           Start Game
         </button>
       </form>

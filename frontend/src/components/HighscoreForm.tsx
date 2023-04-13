@@ -39,7 +39,7 @@ export default function HighscoreForm({
           required
           className="border-2 rounded-lg pl-1"
         />
-        <button className="ml-1 border-2 rounded-lg px-2 bg-sky-700 text-white">
+        <button className="ml-1 rounded-md px-4 py-1 bg-sky-700 text-white">
           Send
         </button>
       </form>

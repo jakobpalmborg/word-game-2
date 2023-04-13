@@ -3,6 +3,7 @@ import InputForm from './components/InputForm';
 import HighscoreForm from './components/HighscoreForm';
 import StartGame from './components/StartGame';
 import GuessListLetters from './components/GuessListLetters';
+import Confetti from 'react-confetti';
 
 function App() {
   const [gameId, setGameId] = useState('');
@@ -74,6 +75,7 @@ function App() {
 
   return (
     <>
+      {win && <Confetti />}
       {!gameStarted && <StartGame onStartGame={startGame} />}
 
       {!gameStarted && <div className="bg-black h-0.5 w-4/6 m-auto mb-2"></div>}

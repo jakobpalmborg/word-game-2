@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import InputForm from './components/InputForm';
 import HighscoreForm from './components/HighscoreForm';
 import StartGame from './components/StartGame';
+import GuessListLetters from './components/GuessListLetters';
 
 function App() {
   const [gameId, setGameId] = useState('');
@@ -67,35 +68,11 @@ function App() {
     setGuessListLetters([...guessListLetters, ...data]);
   }
 
-  // for styling the guesses depending on number of letters
-  let width: string = numChar == 3 ? 'w-52' : numChar == 4 ? 'w-60' : 'w-80';
-
   return (
     <>
       {!gameStarted && <StartGame onStartGame={startGame} />}
 
-      <ul className={`${width} flex justify-center gap-1 m-auto flex-wrap`}>
-        {guessListLetters.map((item, index) => (
-          <div
-            key={index}
-            // for rendering the result
-            className={
-              item.result === 'correct'
-                ? ' bg-green-500'
-                : item.result === 'missplaced'
-                ? 'bg-yellow-400'
-                : 'bg-gray-300'
-            }
-          >
-            <li
-              className="flex items-center justify-center font-bold font-mono uppercase text-4xl one-letter border-2 border-black w-14 h-14"
-              key={index}
-            >
-              {item.letter}
-            </li>
-          </div>
-        ))}
-      </ul>
+      <GuessListLetters guessListLetters={guessListLetters} numChar={numChar} />
 
       {gameStarted && (
         <InputForm onSubmit={handleSubmit} numberOfLetters={numChar} />

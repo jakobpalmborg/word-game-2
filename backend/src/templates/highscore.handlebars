@@ -1,6 +1,7 @@
 <div class='m-auto mx-10 text-center'>
-  <ol class='list-decimal inline-block text-left'>
+  <ol class='list-decimal inline-block text-left mb-6'>
     {{#each highscores}}
+      <div class='bg-black h-0.5 my-2'></div>
       <li>
         Name:<span class='px-2 font-bold'> {{this.name}}</span>
         Time:<span class='px-2 font-bold'> {{this.time}}</span>
@@ -13,7 +14,7 @@
           <span class='text-sm'>And Duplicates Allowed</span>
         {{/if}}
       </li>
-      <div class='bg-black h-0.5 my-2'></div>
+
     {{/each}}
   </ol>
 </div>

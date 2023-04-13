@@ -23,7 +23,7 @@ export default function StartGame({
       >
         <div className="my-2">
           <label className=" mr-1" htmlFor="numLetters">
-            Number of Lettters:
+            Number of Letters:
           </label>
           <select
             id="numLetters"

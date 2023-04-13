@@ -80,6 +80,16 @@ function App() {
 
       {!gameStarted && <div className="bg-black h-0.5 w-4/6 m-auto mb-2"></div>}
 
+      {!gameId && (
+        <div className=" h-full flex justify-center">
+          <img
+            className=" w-4/6 my-4"
+            src="./random-alphabet-circle.png"
+            alt="alphabet image"
+          />
+        </div>
+      )}
+
       <GuessListLetters guessListLetters={guessListLetters} numChar={numChar} />
 
       {gameStarted && (

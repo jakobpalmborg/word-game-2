@@ -6,8 +6,8 @@ export default function HighscoreForm({ gameId }: { gameId: string }) {
   });
 
   return (
-    <div className=" text-center mr-10">
-      <h2 className=" text-6xl text-fuchsia-600 ">You Win!</h2>
+    <div className=" text-center mb-4">
+      <h2 className=" text-5xl pt-2 text-sky-700 ">You Win!</h2>
       <h3 className="font-bold text-lg p-2">Highscore</h3>
       <form
         onSubmit={(event) => {

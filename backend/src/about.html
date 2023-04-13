@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Word Game</title>
+    <title>Word Game - About</title>
+    <link rel="stylesheet" href="./output.css" />
   </head>
   <body class="flex flex-col min-h-screen justify-between">
     <div>
@@ -13,26 +14,33 @@
         </h2>
 
         <nav class="flex justify-evenly">
+          <a href="./"> Home </a>
           <a
             class="font-bold underline decoration-solid decoration-4 underline-offset-4"
-            href="#"
+            href="./about.html"
           >
-            Home
+            About
           </a>
-          <a class="" href="./about.html"> About </a>
           <a class="" href="./highscore"> Highscore </a>
         </nav>
         <div class="bg-black h-0.5 mt-3 w-5/6 m-auto"></div>
       </header>
-      <main class="">
-        <div id="root"></div>
+      <main class="w-96 m-auto">
+        <h1 class="m-2 font-bold text-lg">About the Word Game</h1>
+        <p class="m-2">
+          This is a game inspired by the game Wordle. The game is build with
+          React and the game logic is on the backend with Node and an Express
+          server. There is also a serverside rendered highscore page that uses
+          Handlebars as the template engine and renders highscores from a
+          MongoDB database. The backend uses Mongoose for handeling the
+          database. Both the frontend and backend is developed with TypeScript
+          and Tailwind CSS is used for styling.
+        </p>
       </main>
     </div>
-
     <footer class="h-20 w-full">
       <div class="bg-black h-0.5 w-5/6 m-auto"></div>
       <p class="p-4 text-center">&#169; 2023 Palmborg</p>
     </footer>
-    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

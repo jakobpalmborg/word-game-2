@@ -59,7 +59,7 @@ export default function InputForm({
         <button
           type="submit"
           form="guess-form"
-          className=" block border-2 rounded-lg px-2 bg-sky-700 text-white h-7 m-auto"
+          className=" block border-2 rounded-lg px-2 text-4xl bg-sky-700 text-white w-14 h-14 m-auto pb-2"
         >
           &#10003;
         </button>

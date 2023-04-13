@@ -68,6 +68,10 @@ function App() {
     setGuessListLetters([...guessListLetters, ...data]);
   }
 
+  function handleSubmitHighscore() {
+    setWin(false);
+  }
+
   return (
     <>
       {!gameStarted && <StartGame onStartGame={startGame} />}
@@ -78,7 +82,12 @@ function App() {
         <InputForm onSubmit={handleSubmit} numberOfLetters={numChar} />
       )}
 
-      {win && <HighscoreForm gameId={gameId} />}
+      {win && (
+        <HighscoreForm
+          gameId={gameId}
+          onSubmitHighscore={handleSubmitHighscore}
+        />
+      )}
     </>
   );
 }

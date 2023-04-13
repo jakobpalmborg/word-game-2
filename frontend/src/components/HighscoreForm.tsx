@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-export default function HighscoreForm({ gameId }: { gameId: string }) {
+export default function HighscoreForm({
+  gameId,
+  onSubmitHighscore,
+}: {
+  gameId: string;
+  onSubmitHighscore: () => void;
+}) {
   const [highscoreFormData, setHighscoreFormData] = useState({
     name: '',
   });
@@ -12,6 +18,7 @@ export default function HighscoreForm({ gameId }: { gameId: string }) {
       <form
         onSubmit={(event) => {
           event.preventDefault();
+          onSubmitHighscore();
           fetch(`./api/highscore/${gameId}/highscore`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

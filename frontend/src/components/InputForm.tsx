@@ -24,6 +24,11 @@ export default function InputForm({
 
   function handleChange(event: React.FormEvent<HTMLInputElement>) {
     const { name, value } = event.target as HTMLInputElement;
+    const element = event.target as HTMLElement;
+    const nextSibling = element.nextElementSibling as HTMLElement;
+    if (value.length === 1) {
+      nextSibling ? nextSibling.focus() : element.blur();
+    }
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
@@ -33,25 +38,32 @@ export default function InputForm({
   }
 
   return (
-    <div className="flex my-2 justify-center ml-14">
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          onSubmit(formData);
-        }}
-        className="flex gap-1"
-      >
-        {[...Array(numberOfLetters).keys()].map((item, index) => {
-          return <InputField onChange={handleChange} key={index} id={index} />;
-        })}
-
+    <>
+      <div className="flex my-1 justify-center">
+        <form
+          id="guess-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            onSubmit(formData);
+          }}
+          className="flex gap-1"
+        >
+          {[...Array(numberOfLetters).keys()].map((item, index) => {
+            return (
+              <InputField onChange={handleChange} key={index} id={index} />
+            );
+          })}
+        </form>
+      </div>
+      <div>
         <button
           type="submit"
-          className=" border-2 rounded-lg px-2 bg-sky-700 text-white h-7 m-auto ml-1"
+          form="guess-form"
+          className=" block rounded-lg px-2 text-4xl bg-sky-700 text-white w-14 h-14 m-auto pb-2"
         >
-          GO!
+          &#10003;
         </button>
-      </form>
-    </div>
+      </div>
+    </>
   );
 }

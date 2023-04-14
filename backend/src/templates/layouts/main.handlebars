@@ -6,31 +6,40 @@
     <link rel='stylesheet' href='./output.css' />
 
   </head>
-  <body>
-    <header class='bg-stone-800 h-32 mb-1'>
-      <h2 class='p-4 text-stone-50 text-2xl'>
-        <a href='./'>Word Game</a>
-      </h2>
+  <body class='flex flex-col min-h-screen justify-between'>
+    <div>
+      <header class='mb-4 h-24'>
+        <div class='flex'>
+          <h1
+            class='bg-sky-700 w-20 pt-3 pr-1 mt-2 ml-4 rounded-md text-white text-5xl text-end'
+          >
+            <a href='./'>WG</a>
+          </h1>
+          <h2 class='-rotate-90 text-xs text-sky-700 ml-1 mt-2'>WordGame</h2>
+        </div>
 
-      <nav class='flex justify-evenly p-4'>
-        <a class='text-stone-50 font-bold' href='./'>
-          Home
-        </a>
-        <a class='text-stone-50' href='./about.html'> About </a>
-        <a
-          class='text-stone-50 underline decoration-solid decoration-8 underline-offset-8'
-          href='#'
-        > Highscore </a>
-      </nav>
-    </header>
+        <nav class='flex justify-evenly'>
+          <a href='./'>
+            Home
+          </a>
+          <a class='' href='./about.html'> About </a>
+          <a
+            class='font-bold underline decoration-solid decoration-4 underline-offset-4'
+            href='./highscore'
+          > Highscore </a>
+        </nav>
+        <div class='bg-black h-0.5 mt-3 w-5/6 m-auto'></div>
+      </header>
 
-    <main>
-      <h1 class='text-center font-bold text-lg'>Highscore</h1>
-      <div>{{{body}}}</div>
+      <main>
+        <h1 class='text-center font-bold text-lg mb-2'>Highscore</h1>
+        <div>{{{body}}}</div>
 
-    </main>
-    <footer class='bg-stone-800 h-32 fixed bottom-0 w-full'>
-      <p class='p-4 text-stone-50 text-center'>&#169; 2023 Palmborg</p>
+      </main>
+    </div>
+    <footer class='h-19 w-full'>
+      <div class='bg-black h-0.5 w-5/6 m-auto'></div>
+      <p class='p-4 text-center'>&#169; 2023 Palmborg</p>
     </footer>
   </body>
 </html>

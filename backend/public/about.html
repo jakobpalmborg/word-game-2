@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Game - About</title>
+    <link rel="stylesheet" href="./output.css" />
+  </head>
+  <body class="flex flex-col min-h-screen justify-between">
+    <div>
+      <header class="mb-4 h-24">
+        <div class="flex">
+          <h1
+            class="bg-sky-700 w-20 pt-3 pr-1 mt-2 ml-4 rounded-md text-white text-5xl text-end"
+          >
+            <a href="./">WG</a>
+          </h1>
+          <h2 class="-rotate-90 text-xs text-sky-700 ml-1 mt-2">WordGame</h2>
+        </div>
+
+        <nav class="flex justify-evenly">
+          <a href="./"> Home </a>
+          <a
+            class="font-bold underline decoration-solid decoration-4 underline-offset-4"
+            href="./about.html"
+          >
+            About
+          </a>
+          <a class="" href="./highscore"> Highscore </a>
+        </nav>
+        <div class="bg-black h-0.5 mt-3 w-5/6 m-auto"></div>
+      </header>
+      <main class="max-w-screen-sm m-auto">
+        <h1 class="m-2 font-bold text-2xl">About the Word Game</h1>
+        <p class="m-2">
+          This is a game inspired by the game Wordle. The game is build with
+          React and the game logic is on the backend with Node and an Express
+          server. There is also a serverside rendered highscore page that uses
+          Handlebars as the template engine and renders highscores from a
+          MongoDB database. The backend uses Mongoose for handeling the
+          database. Both the frontend and backend is developed with TypeScript
+          and Tailwind CSS is used for styling. Jest is used to test the game
+          logic.
+        </p>
+        <div class="bg-black h-0.5 w-5/6 m-auto my-4"></div>
+        <h2 class="m-2 font-bold text-lg text-center">Game Created with</h2>
+        <div class="flex gap-10 flex-wrap m-4 justify-center">
+          <img
+            class="w-24"
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+          />
+
+          <img
+            class="w-24"
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+          />
+
+          <img
+            class="w-24"
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original-wordmark.svg"
+          />
+
+          <img
+            class="w-24"
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg"
+          />
+
+          <img
+            class="w-24"
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original-wordmark.svg"
+          />
+
+          <img
+            class="w-24"
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original-wordmark.svg"
+          />
+
+          <img
+            class="w-24"
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg"
+          />
+        </div>
+      </main>
+    </div>
+    <footer class="h-19 w-full">
+      <div class="bg-black h-0.5 w-5/6 m-auto"></div>
+      <p class="p-4 text-center">&#169; 2023 Palmborg</p>
+    </footer>
+  </body>
+</html>
